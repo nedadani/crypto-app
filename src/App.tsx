@@ -1,15 +1,7 @@
 import React from "react";
-import { BarGraph } from "./components/BarChart";
-import { AreaChart } from "./components/AreaChart";
+import { Parent } from "./components/Parent";
 import "./App.css";
 
-const App: React.FC = () => {
-    return (
-        <>
-            <BarGraph />
-            <AreaChart />
-        </>
-    );
-};
+const App: React.FC = () => <Parent />;
 
 export default App;
