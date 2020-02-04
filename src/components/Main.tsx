@@ -16,7 +16,7 @@ export const Main = () => {
         ]
     };
 
-    const openConnection = () => {
+    React.useEffect(() => {
         ws.onopen = () => {
             ws.send(JSON.stringify(subscribeMsg));
         };
@@ -26,17 +26,12 @@ export const Main = () => {
         };
 
         console.log("connected");
-    };
+    });
 
     const closeConnection = () => {
         ws.close();
         console.log("disconnected");
     };
 
-    return (
-        <>
-            <button onClick={openConnection}>Start</button>
-            <button onClick={closeConnection}>Close</button>
-        </>
-    );
+    return <button onClick={closeConnection}>Close</button>;
 };
