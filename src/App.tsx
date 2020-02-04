@@ -1,7 +1,7 @@
 import React from "react";
-import { Parent } from "./components/Parent";
+import { Main } from "./components/Main";
 import "./App.css";
 
-const App: React.FC = () => <Parent />;
+const App: React.FC = () => <Main />;
 
 export default App;
