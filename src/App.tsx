@@ -1,7 +1,7 @@
 import React from "react";
-import { Main } from "./components/Main";
+import { Chart } from "./components/Chart";
 import "./App.css";
 
-const App: React.FC = () => <Main />;
+const App: React.FC = () => <Chart />;
 
 export default App;
