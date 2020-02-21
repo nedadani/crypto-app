@@ -12,14 +12,14 @@ const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
 export const Chart: React.SFC = () => {
     const [data, setData] = React.useState(
-        [] as { x: Date; y: number; id: string }[]
+        [] as { time: Date; price: number }[]
     );
 
     const dataRef = React.useRef(data);
     dataRef.current = data;
 
     React.useEffect(() => {
-        const subscribeMsg = {
+        const subscribeMessage = {
             type: "subscribe",
             product_ids: ["ETH-USD"],
             channels: [
@@ -31,19 +31,20 @@ export const Chart: React.SFC = () => {
         };
 
         ws.onopen = () => {
-            ws.send(JSON.stringify(subscribeMsg));
+            ws.send(JSON.stringify(subscribeMessage));
         };
 
-        ws.onmessage = object => {
-            console.log(object);
-            setData([
-                ...dataRef.current,
-                {
-                    x: new Date(JSON.parse(object.data).time),
-                    y: JSON.parse(object.data).price,
-                    id: JSON.parse(object.data).trade_id
-                }
-            ]);
+        ws.onmessage = response => {
+            const parsedResponse = JSON.parse(response.data);
+            console.log(parsedResponse);
+            parsedResponse.price &&
+                setData([
+                    ...dataRef.current,
+                    {
+                        time: new Date(parsedResponse.time),
+                        price: parsedResponse.price
+                    }
+                ]);
         };
     }, []);
 
@@ -69,13 +70,13 @@ export const Chart: React.SFC = () => {
                         />
                     </linearGradient>
                 </defs>
-                <XAxis dataKey="x" />
+                <XAxis dataKey="time" />
                 <YAxis type="number" domain={["dataMin - 1", "dataMax + 1"]} />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
                 <Area
                     type="monotone"
-                    dataKey="y"
+                    dataKey="price"
                     stroke="#82ca9d"
                     fillOpacity={1}
                     fill="url(#colorUv)"
