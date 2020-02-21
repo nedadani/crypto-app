@@ -70,7 +70,7 @@ export const Chart: React.SFC = () => {
                     </linearGradient>
                 </defs>
                 <XAxis dataKey="x" />
-                <YAxis />
+                <YAxis type="number" domain={["dataMin - 1", "dataMax + 1"]} />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
                 <Area
