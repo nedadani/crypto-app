@@ -1,4 +1,5 @@
 import React from "react";
+import { CoinPicker } from "./CoinPicker";
 import {
     AreaChart,
     XAxis,
@@ -10,46 +11,80 @@ import {
 
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
-export const Chart: React.SFC = () => {
+export const Chart: React.FC = () => {
+    const [coin, setCoin] = React.useState("ETH" as string);
     const [data, setData] = React.useState(
         [] as { time: Date; price: number }[]
     );
 
+    /** Saves the previous data from the state on state update */
     const dataRef = React.useRef(data);
     dataRef.current = data;
 
-    React.useEffect(() => {
-        const subscribeMessage = {
+    /** Creates subscibe message */
+    const subscribeMessage = (coinName: string) => {
+        return {
             type: "subscribe",
-            product_ids: ["ETH-USD"],
             channels: [
                 {
                     name: "ticker",
-                    product_ids: ["ETH-USD"]
+                    product_ids: [`${coinName}-USD`]
                 }
             ]
         };
+    };
 
+    /** Creates unsubscibe message */
+    const unsubscribeMessage = (coinName: string) => {
+        return {
+            type: "unsubscribe",
+            product_ids: [`${coinName}-USD`],
+            channels: ["ticker"]
+        };
+    };
+
+    /** Parses the response and sets it to state */
+    const parseResponse = (response: { data: string }) => {
+        const parsedResponse = JSON.parse(response.data);
+
+        parsedResponse.price &&
+            setData([
+                ...dataRef.current,
+                {
+                    time: new Date(parsedResponse.time),
+                    price: parsedResponse.price
+                }
+            ]);
+    };
+
+    React.useEffect(() => {
         ws.onopen = () => {
-            ws.send(JSON.stringify(subscribeMessage));
+            ws.send(JSON.stringify(subscribeMessage(coin)));
         };
 
         ws.onmessage = response => {
-            const parsedResponse = JSON.parse(response.data);
-            console.log(parsedResponse);
-            parsedResponse.price &&
-                setData([
-                    ...dataRef.current,
-                    {
-                        time: new Date(parsedResponse.time),
-                        price: parsedResponse.price
-                    }
-                ]);
+            parseResponse(response);
         };
     }, []);
 
+    /** Updates the cryptocurrency that is displayed */
+    const changeCoin = (newCoin: string) => {
+        setData([]);
+
+        ws.send(JSON.stringify(unsubscribeMessage(coin)));
+
+        ws.send(JSON.stringify(subscribeMessage(newCoin)));
+
+        ws.onmessage = response => {
+            parseResponse(response);
+        };
+
+        setCoin(newCoin);
+    };
+
     return (
         <>
+            <CoinPicker changeCoin={changeCoin} />
             <AreaChart
                 width={730}
                 height={250}
@@ -71,7 +106,7 @@ export const Chart: React.SFC = () => {
                     </linearGradient>
                 </defs>
                 <XAxis dataKey="time" />
-                <YAxis type="number" domain={["dataMin - 1", "dataMax + 1"]} />
+                <YAxis />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
                 <Area
