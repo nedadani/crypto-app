@@ -1,5 +1,6 @@
 import React from "react";
 import { CoinPicker } from "./CoinPicker";
+import { CurrencyPicker } from "./CurrencyPicker";
 import {
     AreaChart,
     XAxis,
@@ -13,6 +14,7 @@ const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
 export const Chart: React.FC = () => {
     const [coin, setCoin] = React.useState("ETH" as string);
+    const [currency, setCurrency] = React.useState("USD" as string);
     const [data, setData] = React.useState(
         [] as { time: Date; price: number }[]
     );
@@ -22,23 +24,23 @@ export const Chart: React.FC = () => {
     dataRef.current = data;
 
     /** Creates subscibe message */
-    const subscribeMessage = (coinName: string) => {
+    const subscribeMessage = (coinName: string, currencyName: string) => {
         return {
             type: "subscribe",
             channels: [
                 {
                     name: "ticker",
-                    product_ids: [`${coinName}-USD`]
+                    product_ids: [`${coinName}-${currencyName}`]
                 }
             ]
         };
     };
 
     /** Creates unsubscibe message */
-    const unsubscribeMessage = (coinName: string) => {
+    const unsubscribeMessage = (coinName: string, currencyName: string) => {
         return {
             type: "unsubscribe",
-            product_ids: [`${coinName}-USD`],
+            product_ids: [`${coinName}-${currencyName}`],
             channels: ["ticker"]
         };
     };
@@ -59,7 +61,7 @@ export const Chart: React.FC = () => {
 
     React.useEffect(() => {
         ws.onopen = () => {
-            ws.send(JSON.stringify(subscribeMessage(coin)));
+            ws.send(JSON.stringify(subscribeMessage(coin, currency)));
         };
 
         ws.onmessage = response => {
@@ -67,24 +69,32 @@ export const Chart: React.FC = () => {
         };
     }, []);
 
-    /** Updates the cryptocurrency that is displayed */
-    const changeCoin = (newCoin: string) => {
+    /** Updates the currency that is displayed */
+    const updateCurrency = (newCurrency: string) => {
         setData([]);
 
-        ws.send(JSON.stringify(unsubscribeMessage(coin)));
+        ws.send(JSON.stringify(unsubscribeMessage(coin, currency)));
 
-        ws.send(JSON.stringify(subscribeMessage(newCoin)));
+        ws.send(JSON.stringify(subscribeMessage(coin, newCurrency)));
 
-        ws.onmessage = response => {
-            parseResponse(response);
-        };
+        setCurrency(newCurrency);
+    };
+
+    /** Updates the cryptocurrency that is displayed */
+    const updateCoin = (newCoin: string) => {
+        setData([]);
+
+        ws.send(JSON.stringify(unsubscribeMessage(coin, currency)));
+
+        ws.send(JSON.stringify(subscribeMessage(newCoin, currency)));
 
         setCoin(newCoin);
     };
 
     return (
         <>
-            <CoinPicker changeCoin={changeCoin} />
+            <CoinPicker updateCoin={updateCoin} />
+            <CurrencyPicker updateCurrency={updateCurrency} />
             <AreaChart
                 width={730}
                 height={250}
