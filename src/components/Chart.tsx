@@ -1,6 +1,7 @@
 import React from "react";
 import { CoinPicker } from "./CoinPicker";
 import { CurrencyPicker } from "./CurrencyPicker";
+import { CurrentPrice } from "./CurrentPrice";
 import {
     AreaChart,
     XAxis,
@@ -95,6 +96,11 @@ export const Chart: React.FC = () => {
         <>
             <CoinPicker updateCoin={updateCoin} />
             <CurrencyPicker updateCurrency={updateCurrency} />
+            <CurrentPrice
+                price={data.length > 0 ? data[data.length - 1].price : 0}
+                currency={currency}
+                coin={coin}
+            />
             <AreaChart
                 width={730}
                 height={250}
