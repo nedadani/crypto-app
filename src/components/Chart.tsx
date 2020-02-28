@@ -1,7 +1,9 @@
 import React from "react";
+import { currencySymbols } from "../constants";
 import { CoinPicker } from "./CoinPicker";
 import { CurrencyPicker } from "./CurrencyPicker";
 import { CurrentPrice } from "./CurrentPrice";
+import { HighPrice } from "./HighPrice";
 import {
     AreaChart,
     XAxis,
@@ -17,7 +19,7 @@ export const Chart: React.FC = () => {
     const [coin, setCoin] = React.useState("ETH" as string);
     const [currency, setCurrency] = React.useState("USD" as string);
     const [data, setData] = React.useState(
-        [] as { time: Date; price: number }[]
+        [] as { time: Date; price: string; highPrice: string }[]
     );
 
     /** Saves the previous data from the state on state update */
@@ -55,7 +57,8 @@ export const Chart: React.FC = () => {
                 ...dataRef.current,
                 {
                     time: new Date(parsedResponse.time),
-                    price: parsedResponse.price
+                    price: parsedResponse.price,
+                    highPrice: parsedResponse.high_24h
                 }
             ]);
     };
@@ -97,9 +100,16 @@ export const Chart: React.FC = () => {
             <CoinPicker updateCoin={updateCoin} />
             <CurrencyPicker updateCurrency={updateCurrency} />
             <CurrentPrice
-                price={data.length > 0 ? data[data.length - 1].price : 0}
+                price={data.length > 0 ? data[data.length - 1].price : "0"}
                 currency={currency}
                 coin={coin}
+                symbol={currencySymbols[currency]}
+            />
+            <HighPrice
+                symbol={currencySymbols[currency]}
+                highPrice={
+                    data.length > 0 ? data[data.length - 1].highPrice : "0"
+                }
             />
             <AreaChart
                 width={730}
