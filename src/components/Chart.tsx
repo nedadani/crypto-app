@@ -4,6 +4,7 @@ import { CoinPicker } from "./CoinPicker";
 import { CurrencyPicker } from "./CurrencyPicker";
 import { CurrentPrice } from "./CurrentPrice";
 import { HighPrice } from "./HighPrice";
+import { LowPrice } from "./LowPrice";
 import {
     AreaChart,
     XAxis,
@@ -19,7 +20,12 @@ export const Chart: React.FC = () => {
     const [coin, setCoin] = React.useState("ETH" as string);
     const [currency, setCurrency] = React.useState("USD" as string);
     const [data, setData] = React.useState(
-        [] as { time: Date; price: string; highPrice: string }[]
+        [] as {
+            time: Date;
+            price: string;
+            highPrice: string;
+            lowPrice: string;
+        }[]
     );
 
     /** Saves the previous data from the state on state update */
@@ -58,7 +64,8 @@ export const Chart: React.FC = () => {
                 {
                     time: new Date(parsedResponse.time),
                     price: parsedResponse.price,
-                    highPrice: parsedResponse.high_24h
+                    highPrice: parsedResponse.high_24h,
+                    lowPrice: parsedResponse.low_24h
                 }
             ]);
     };
@@ -109,6 +116,12 @@ export const Chart: React.FC = () => {
                 symbol={currencySymbols[currency]}
                 highPrice={
                     data.length > 0 ? data[data.length - 1].highPrice : "0"
+                }
+            />
+            <LowPrice
+                symbol={currencySymbols[currency]}
+                lowPrice={
+                    data.length > 0 ? data[data.length - 1].lowPrice : "0"
                 }
             />
             <AreaChart
