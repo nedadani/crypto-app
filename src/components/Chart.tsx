@@ -17,7 +17,7 @@ import {
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
 export const Chart: React.FC = () => {
-    const [coin, setCoin] = React.useState("ETH" as string);
+    const [coin, setCoin] = React.useState("BTC" as string);
     const [currency, setCurrency] = React.useState("USD" as string);
     const [data, setData] = React.useState(
         [] as {
