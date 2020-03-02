@@ -145,7 +145,12 @@ export const Chart: React.FC = () => {
                     </linearGradient>
                 </defs>
                 <XAxis dataKey="time" />
-                <YAxis />
+                <YAxis
+                    type="number"
+                    domain={["dataMin - 3", "dataMax + 3"]}
+                    allowDecimals={false}
+                    unit={currency === "USD" ? "$" : "€"}
+                />
                 <CartesianGrid strokeDasharray="3 3" />
                 <Tooltip />
                 <Area
