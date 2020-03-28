@@ -14,6 +14,8 @@ import {
     Area
 } from "recharts";
 
+import { Wrapper } from "./Chart.styles";
+
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
 export const Chart: React.FC = () => {
@@ -103,7 +105,7 @@ export const Chart: React.FC = () => {
     };
 
     return (
-        <>
+        <Wrapper>
             <CoinPicker updateCoin={updateCoin} />
             <CurrencyPicker updateCurrency={updateCurrency} />
             <CurrentPrice
@@ -163,6 +165,6 @@ export const Chart: React.FC = () => {
                 />
             </AreaChart>
             <button onClick={() => ws.close()}>STOP</button>
-        </>
+        </Wrapper>
     );
 };

@@ -1,13 +1,6 @@
 import React from "react";
-import styled from "styled-components";
 
-interface ButtonProps {
-    selected: boolean;
-}
-
-const Button = styled.button<ButtonProps>`
-    background-color: ${props => (props.selected ? "red" : "white")};
-`;
+import { Button, Wrapper } from "./CoinPicker.styles";
 
 interface ComponentProps {
     updateCoin(newCoin: string): void;
@@ -17,7 +10,7 @@ export const CoinPicker: React.FC<ComponentProps> = props => {
     const [active, setActive] = React.useState("BTC" as string);
 
     return (
-        <>
+        <Wrapper>
             <Button
                 selected={active === "BTC"}
                 onClick={() => {
@@ -45,6 +38,6 @@ export const CoinPicker: React.FC<ComponentProps> = props => {
             >
                 Litecoin
             </Button>
-        </>
+        </Wrapper>
     );
 };
