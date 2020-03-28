@@ -1,10 +1,10 @@
 import React from "react";
-import { currencySymbols } from "../constants";
-import { CoinPicker } from "./CoinPicker";
-import { CurrencyPicker } from "./CurrencyPicker";
-import { CurrentPrice } from "./CurrentPrice";
-import { HighPrice } from "./HighPrice";
-import { LowPrice } from "./LowPrice";
+import { currencySymbols } from "../../constants";
+import { CoinPicker } from "../CoinPicker/CoinPicker.view";
+import { CurrencyPicker } from "../CurrencyPicker/CurrencyPicker.view";
+import { CurrentPrice } from "../CurrentPrice/CurrentPrice.view";
+import { HighPrice } from "../HighPrice/HighPrice.view";
+import { LowPrice } from "../LowPrice/LowPrice.view";
 import {
     AreaChart,
     XAxis,
