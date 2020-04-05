@@ -15,7 +15,7 @@ import {
     Area,
 } from "recharts";
 
-import { Wrapper } from "./Chart.styles";
+import { Wrapper, Container } from "./Chart.styles";
 
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
@@ -108,8 +108,10 @@ export const Chart: React.FC = () => {
     return (
         <Wrapper>
             <CoinPicker updateCoin={updateCoin} />
-            <CurrencyPicker updateCurrency={updateCurrency} />
-            <DateTime />
+            <Container>
+                <CurrencyPicker updateCurrency={updateCurrency} />
+                <DateTime />
+            </Container>
             <CurrentPrice
                 price={data.length > 0 ? data[data.length - 1].price : "0"}
                 currency={currency}

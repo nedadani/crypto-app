@@ -7,4 +7,9 @@ const Wrapper = styled.div`
     font-size: 12pt;
 `;
 
-export { Wrapper };
+const Container = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
+export { Wrapper, Container };
