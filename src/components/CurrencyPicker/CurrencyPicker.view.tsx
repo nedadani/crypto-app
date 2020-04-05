@@ -1,22 +1,14 @@
 import React from "react";
-import styled from "styled-components";
-
-interface ButtonProps {
-    selected: boolean;
-}
-
-const Button = styled.button<ButtonProps>`
-    background-color: ${props => (props.selected ? "red" : "white")};
-`;
+import { Button, Wrapper } from "./CurrencyPicker.styles";
 
 interface ComponentProps {
     updateCurrency(newCurrency: string): void;
 }
 
-export const CurrencyPicker: React.FC<ComponentProps> = props => {
+export const CurrencyPicker: React.FC<ComponentProps> = (props) => {
     const [active, setActive] = React.useState("USD" as string);
     return (
-        <>
+        <Wrapper>
             <Button
                 selected={active === "USD"}
                 onClick={() => {
@@ -35,6 +27,6 @@ export const CurrencyPicker: React.FC<ComponentProps> = props => {
             >
                 EUR
             </Button>
-        </>
+        </Wrapper>
     );
 };
