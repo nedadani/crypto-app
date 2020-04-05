@@ -2,6 +2,7 @@ import React from "react";
 import { currencySymbols } from "../../constants";
 import { CoinPicker } from "../CoinPicker/CoinPicker.view";
 import { CurrencyPicker } from "../CurrencyPicker/CurrencyPicker.view";
+import { DateTime } from "../DateTime/DateTime.view";
 import { CurrentPrice } from "../CurrentPrice/CurrentPrice.view";
 import { HighPrice } from "../HighPrice/HighPrice.view";
 import { LowPrice } from "../LowPrice/LowPrice.view";
@@ -11,7 +12,7 @@ import {
     YAxis,
     CartesianGrid,
     Tooltip,
-    Area
+    Area,
 } from "recharts";
 
 import { Wrapper } from "./Chart.styles";
@@ -41,9 +42,9 @@ export const Chart: React.FC = () => {
             channels: [
                 {
                     name: "ticker",
-                    product_ids: [`${coinName}-${currencyName}`]
-                }
-            ]
+                    product_ids: [`${coinName}-${currencyName}`],
+                },
+            ],
         };
     };
 
@@ -52,7 +53,7 @@ export const Chart: React.FC = () => {
         return {
             type: "unsubscribe",
             product_ids: [`${coinName}-${currencyName}`],
-            channels: ["ticker"]
+            channels: ["ticker"],
         };
     };
 
@@ -67,8 +68,8 @@ export const Chart: React.FC = () => {
                     time: new Date(parsedResponse.time),
                     price: parsedResponse.price,
                     highPrice: parsedResponse.high_24h,
-                    lowPrice: parsedResponse.low_24h
-                }
+                    lowPrice: parsedResponse.low_24h,
+                },
             ]);
     };
 
@@ -77,7 +78,7 @@ export const Chart: React.FC = () => {
             ws.send(JSON.stringify(subscribeMessage(coin, currency)));
         };
 
-        ws.onmessage = response => {
+        ws.onmessage = (response) => {
             parseResponse(response);
         };
     }, []);
@@ -108,6 +109,7 @@ export const Chart: React.FC = () => {
         <Wrapper>
             <CoinPicker updateCoin={updateCoin} />
             <CurrencyPicker updateCurrency={updateCurrency} />
+            <DateTime />
             <CurrentPrice
                 price={data.length > 0 ? data[data.length - 1].price : "0"}
                 currency={currency}
