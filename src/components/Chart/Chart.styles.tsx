@@ -12,4 +12,9 @@ const Container = styled.div`
     flex-direction: row;
 `;
 
-export { Wrapper, Container };
+const CoinName = styled.div`
+    text-align: center;
+    padding: 1em 0;
+`;
+
+export { Wrapper, Container, CoinName };

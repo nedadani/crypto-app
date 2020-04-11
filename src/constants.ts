@@ -4,5 +4,15 @@ interface CurrencyMap {
 
 export const currencySymbols: CurrencyMap = {
     USD: "$",
-    EUR: "€"
+    EUR: "€",
+};
+
+interface CoinMap {
+    [key: string]: string;
+}
+
+export const coinNames: CoinMap = {
+    BTC: "Bitcoin",
+    ETH: "Ether",
+    LTC: "Litecoin",
 };

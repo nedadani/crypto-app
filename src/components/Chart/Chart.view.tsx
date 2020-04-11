@@ -1,5 +1,5 @@
 import React from "react";
-import { currencySymbols } from "../../constants";
+import { currencySymbols, coinNames } from "../../constants";
 import { CoinPicker } from "../CoinPicker/CoinPicker.view";
 import { CurrencyPicker } from "../CurrencyPicker/CurrencyPicker.view";
 import { DateTime } from "../DateTime/DateTime.view";
@@ -15,7 +15,7 @@ import {
     Area,
 } from "recharts";
 
-import { Wrapper, Container } from "./Chart.styles";
+import { Wrapper, Container, CoinName } from "./Chart.styles";
 
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
@@ -108,6 +108,7 @@ export const Chart: React.FC = () => {
     return (
         <Wrapper>
             <CoinPicker updateCoin={updateCoin} />
+            <CoinName>{coinNames[coin]}</CoinName>
             <Container>
                 <CurrencyPicker updateCurrency={updateCurrency} />
                 <DateTime />
