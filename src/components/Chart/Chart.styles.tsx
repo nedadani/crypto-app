@@ -14,6 +14,8 @@ const Container = styled.div`
 
 const CoinName = styled.div`
     text-align: center;
+    font-size: 1.5em;
+    color: ${(props) => props.theme.primary.text};
     padding: 1em 0;
 `;
 
