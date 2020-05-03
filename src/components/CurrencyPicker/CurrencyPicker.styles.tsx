@@ -6,8 +6,14 @@ interface ButtonProps {
 
 const Button = styled.button<ButtonProps>`
     border-radius: 1px;
-    background-color: ${(props) => (props.selected ? "#0a3d62" : "#fff")};
-    color: ${(props) => (props.selected ? "#fff" : "#2f3542")};
+    background-color: ${(props) =>
+        props.selected
+            ? props.theme.secondary.buttons
+            : props.theme.primary.background};
+    color: ${(props) =>
+        props.selected
+            ? props.theme.primary.background
+            : props.theme.primary.text};
     margin: 0 0.5em 0 0;
 `;
 
