@@ -7,6 +7,11 @@ const Wrapper = styled.div`
     font-size: 12pt;
 `;
 
+const PriceWrapper = styled.div`
+    display: flex;
+    flex-direction: row;
+`;
+
 const Container = styled.div`
     display: flex;
     flex-direction: row;
@@ -19,4 +24,4 @@ const CoinName = styled.div`
     padding: 1em 0;
 `;
 
-export { Wrapper, Container, CoinName };
+export { Wrapper, PriceWrapper, Container, CoinName };

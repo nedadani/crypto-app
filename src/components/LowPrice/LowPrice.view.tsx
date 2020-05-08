@@ -1,18 +1,20 @@
 import React from "react";
 
+import { Container, Label, Price } from "./LowPrice.styles";
+
 interface ComponentProps {
     symbol: string;
     lowPrice: string;
 }
 
-export const LowPrice: React.FC<ComponentProps> = props => {
+export const LowPrice: React.FC<ComponentProps> = (props) => {
     return (
-        <>
-            <div>Low Price</div>
-            <div>
+        <Container>
+            <Label>Low</Label>
+            <Price>
                 {props.symbol}
                 {parseFloat(props.lowPrice).toFixed(2)}
-            </div>
-        </>
+            </Price>
+        </Container>
     );
 };

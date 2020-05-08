@@ -1,5 +1,7 @@
 import React from "react";
 
+import { Container, Price, Label } from "./CurrentPrice.styles";
+
 interface ComponentProps {
     price: string;
     currency: string;
@@ -7,17 +9,16 @@ interface ComponentProps {
     symbol: string;
 }
 
-export const CurrentPrice: React.FC<ComponentProps> = props => {
+export const CurrentPrice: React.FC<ComponentProps> = (props) => {
     return (
-        <>
-            <div>Price</div>
-            <div>
+        <Container>
+            <Price>
                 {props.symbol}
                 {props.price}
-            </div>
-            <div>
+            </Price>
+            <Label>
                 {props.currency} - {props.coin}
-            </div>
-        </>
+            </Label>
+        </Container>
     );
 };

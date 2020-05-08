@@ -8,7 +8,7 @@ const Button = styled.button<ButtonProps>`
     height: 2em;
     width: 10em;
     border-radius: 15px;
-    border: none;
+    border: 1px solid ${(props) => props.theme.primary.text};
     background-color: ${(props) =>
         props.selected
             ? props.theme.secondary.buttons

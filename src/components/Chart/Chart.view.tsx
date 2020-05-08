@@ -15,7 +15,7 @@ import {
     Area,
 } from "recharts";
 
-import { Wrapper, Container, CoinName } from "./Chart.styles";
+import { Wrapper, PriceWrapper, Container, CoinName } from "./Chart.styles";
 
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
@@ -113,24 +113,26 @@ export const Chart: React.FC = () => {
                 <CurrencyPicker updateCurrency={updateCurrency} />
                 <DateTime />
             </Container>
-            <CurrentPrice
-                price={data.length > 0 ? data[data.length - 1].price : "0"}
-                currency={currency}
-                coin={coin}
-                symbol={currencySymbols[currency]}
-            />
-            <HighPrice
-                symbol={currencySymbols[currency]}
-                highPrice={
-                    data.length > 0 ? data[data.length - 1].highPrice : "0"
-                }
-            />
-            <LowPrice
-                symbol={currencySymbols[currency]}
-                lowPrice={
-                    data.length > 0 ? data[data.length - 1].lowPrice : "0"
-                }
-            />
+            <PriceWrapper>
+                <CurrentPrice
+                    price={data.length > 0 ? data[data.length - 1].price : "0"}
+                    currency={currency}
+                    coin={coin}
+                    symbol={currencySymbols[currency]}
+                />
+                <HighPrice
+                    symbol={currencySymbols[currency]}
+                    highPrice={
+                        data.length > 0 ? data[data.length - 1].highPrice : "0"
+                    }
+                />
+                <LowPrice
+                    symbol={currencySymbols[currency]}
+                    lowPrice={
+                        data.length > 0 ? data[data.length - 1].lowPrice : "0"
+                    }
+                />
+            </PriceWrapper>
             <AreaChart
                 width={730}
                 height={250}
