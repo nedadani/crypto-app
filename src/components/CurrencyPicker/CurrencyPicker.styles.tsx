@@ -6,6 +6,7 @@ interface ButtonProps {
 
 const Button = styled.button<ButtonProps>`
     border-radius: 1px;
+    border: none;
     background-color: ${(props) =>
         props.selected
             ? props.theme.secondary.buttons
