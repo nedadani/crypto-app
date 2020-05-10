@@ -15,6 +15,11 @@ const PriceWrapper = styled.div`
 const Container = styled.div`
     display: flex;
     flex-direction: row;
+    margin: 0 0 0.5em 0;
+`;
+
+const ChartContainer = styled.div`
+    border: 1px solid ${(props) => props.theme.primary.details};
 `;
 
 const CoinName = styled.div`
@@ -24,4 +29,4 @@ const CoinName = styled.div`
     padding: 1em 0;
 `;
 
-export { Wrapper, PriceWrapper, Container, CoinName };
+export { Wrapper, PriceWrapper, Container, ChartContainer, CoinName };

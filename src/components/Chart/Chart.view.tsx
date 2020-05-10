@@ -15,7 +15,13 @@ import {
     Area,
 } from "recharts";
 
-import { Wrapper, PriceWrapper, Container, CoinName } from "./Chart.styles";
+import {
+    Wrapper,
+    PriceWrapper,
+    Container,
+    ChartContainer,
+    CoinName,
+} from "./Chart.styles";
 
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
@@ -113,64 +119,78 @@ export const Chart: React.FC = () => {
                 <CurrencyPicker updateCurrency={updateCurrency} />
                 <DateTime />
             </Container>
-            <PriceWrapper>
-                <CurrentPrice
-                    price={data.length > 0 ? data[data.length - 1].price : "0"}
-                    currency={currency}
-                    coin={coin}
-                    symbol={currencySymbols[currency]}
-                />
-                <HighPrice
-                    symbol={currencySymbols[currency]}
-                    highPrice={
-                        data.length > 0 ? data[data.length - 1].highPrice : "0"
-                    }
-                />
-                <LowPrice
-                    symbol={currencySymbols[currency]}
-                    lowPrice={
-                        data.length > 0 ? data[data.length - 1].lowPrice : "0"
-                    }
-                />
-            </PriceWrapper>
-            <AreaChart
-                width={730}
-                height={250}
-                data={data}
-                margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
-            >
-                <defs>
-                    <linearGradient id="colorUv" x1="0" y1="0" x2="0" y2="1">
-                        <stop
-                            offset="5%"
-                            stopColor="#8884d8"
-                            stopOpacity={0.8}
-                        />
-                        <stop
-                            offset="95%"
-                            stopColor="#8884d8"
-                            stopOpacity={0}
-                        />
-                    </linearGradient>
-                </defs>
-                <XAxis dataKey="time" />
-                <YAxis
-                    type="number"
-                    domain={["dataMin - 3", "dataMax + 3"]}
-                    allowDecimals={false}
-                    unit={currency === "USD" ? "$" : "€"}
-                />
-                <CartesianGrid strokeDasharray="3 3" />
-                <Tooltip />
-                <Area
-                    type="monotone"
-                    dataKey="price"
-                    stroke="#82ca9d"
-                    fillOpacity={1}
-                    fill="url(#colorUv)"
-                    isAnimationActive={false}
-                />
-            </AreaChart>
+            <ChartContainer>
+                <PriceWrapper>
+                    <CurrentPrice
+                        price={
+                            data.length > 0 ? data[data.length - 1].price : "0"
+                        }
+                        currency={currency}
+                        coin={coin}
+                        symbol={currencySymbols[currency]}
+                    />
+                    <HighPrice
+                        symbol={currencySymbols[currency]}
+                        highPrice={
+                            data.length > 0
+                                ? data[data.length - 1].highPrice
+                                : "0"
+                        }
+                    />
+                    <LowPrice
+                        symbol={currencySymbols[currency]}
+                        lowPrice={
+                            data.length > 0
+                                ? data[data.length - 1].lowPrice
+                                : "0"
+                        }
+                    />
+                </PriceWrapper>
+                <AreaChart
+                    width={730}
+                    height={250}
+                    data={data}
+                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                >
+                    <defs>
+                        <linearGradient
+                            id="colorUv"
+                            x1="0"
+                            y1="0"
+                            x2="0"
+                            y2="1"
+                        >
+                            <stop
+                                offset="5%"
+                                stopColor="#8884d8"
+                                stopOpacity={0.8}
+                            />
+                            <stop
+                                offset="95%"
+                                stopColor="#8884d8"
+                                stopOpacity={0}
+                            />
+                        </linearGradient>
+                    </defs>
+                    <XAxis dataKey="time" />
+                    <YAxis
+                        type="number"
+                        domain={["dataMin - 3", "dataMax + 3"]}
+                        allowDecimals={false}
+                        unit={currency === "USD" ? "$" : "€"}
+                    />
+                    <CartesianGrid strokeDasharray="3 3" />
+                    <Tooltip />
+                    <Area
+                        type="monotone"
+                        dataKey="price"
+                        stroke="#82ca9d"
+                        fillOpacity={1}
+                        fill="url(#colorUv)"
+                        isAnimationActive={false}
+                    />
+                </AreaChart>
+            </ChartContainer>
             <button onClick={() => ws.close()}>STOP</button>
         </Wrapper>
     );
