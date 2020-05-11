@@ -147,10 +147,10 @@ export const Chart: React.FC = () => {
                     />
                 </PriceWrapper>
                 <AreaChart
-                    width={730}
-                    height={250}
+                    width={1000}
+                    height={450}
                     data={data}
-                    margin={{ top: 10, right: 30, left: 0, bottom: 0 }}
+                    margin={{ top: 50, right: 30, left: 30, bottom: 50 }}
                 >
                     <defs>
                         <linearGradient

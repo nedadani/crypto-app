@@ -8,6 +8,7 @@ const Wrapper = styled.div`
 `;
 
 const PriceWrapper = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
 `;
@@ -20,6 +21,9 @@ const Container = styled.div`
 
 const ChartContainer = styled.div`
     border: 1px solid ${(props) => props.theme.primary.details};
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 `;
 
 const CoinName = styled.div`
