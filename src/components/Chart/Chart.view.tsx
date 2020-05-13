@@ -15,6 +15,7 @@ import {
     Area,
 } from "recharts";
 
+import { withTheme } from "styled-components";
 import {
     Wrapper,
     PriceWrapper,
@@ -23,9 +24,13 @@ import {
     CoinName,
 } from "./Chart.styles";
 
+interface ChartProps {
+    theme: any;
+}
+
 const ws = new WebSocket("wss://ws-feed.pro.coinbase.com");
 
-export const Chart: React.FC = () => {
+const Chart: React.FC<ChartProps> = (props) => {
     const [coin, setCoin] = React.useState("BTC" as string);
     const [currency, setCurrency] = React.useState("USD" as string);
     const [data, setData] = React.useState(
@@ -162,29 +167,28 @@ export const Chart: React.FC = () => {
                         >
                             <stop
                                 offset="5%"
-                                stopColor="#8884d8"
+                                stopColor={props.theme.secondary.graph}
                                 stopOpacity={0.8}
                             />
                             <stop
                                 offset="95%"
-                                stopColor="#8884d8"
+                                stopColor={props.theme.secondary.graph}
                                 stopOpacity={0}
                             />
                         </linearGradient>
                     </defs>
-                    <XAxis dataKey="time" />
+                    <XAxis dataKey="time" tickCount={1} />
                     <YAxis
                         type="number"
                         domain={["dataMin - 3", "dataMax + 3"]}
                         allowDecimals={false}
                         unit={currency === "USD" ? "$" : "€"}
                     />
-                    <CartesianGrid strokeDasharray="3 3" />
                     <Tooltip />
                     <Area
                         type="monotone"
                         dataKey="price"
-                        stroke="#82ca9d"
+                        stroke={props.theme.secondary.graph}
                         fillOpacity={1}
                         fill="url(#colorUv)"
                         isAnimationActive={false}
@@ -195,3 +199,5 @@ export const Chart: React.FC = () => {
         </Wrapper>
     );
 };
+
+export default withTheme(Chart);

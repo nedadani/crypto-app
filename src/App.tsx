@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Theme from "./Theme";
 
-import { Chart } from "./components/Chart/Chart.view";
+import Chart from "./components/Chart/Chart.view";
 import { Header } from "./components/Header/Header.view";
 import { Wrapper } from "./App.styles";
 
