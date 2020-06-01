@@ -6,25 +6,25 @@ import { Header } from "./components/Header/Header.view";
 import { Wrapper } from "./App.styles";
 
 const App: React.FC = () => {
-    const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState("dark");
 
-    const toggleTheme = () => {
-        if (theme === "light") {
-            setTheme("dark");
-        } else {
-            setTheme("light");
-        }
-    };
+  const toggleTheme = () => {
+    if (theme === "light") {
+      setTheme("dark");
+    } else {
+      setTheme("light");
+    }
+  };
 
-    return (
-        <Theme theme={theme}>
-            <Wrapper>
-                <Header />
-                <button onClick={toggleTheme}>Toggle theme</button>
-                <Chart />
-            </Wrapper>
-        </Theme>
-    );
+  return (
+    <Theme theme={theme}>
+      <Wrapper>
+        <Header />
+        <button onClick={toggleTheme}>Toggle theme</button>
+        <Chart />
+      </Wrapper>
+    </Theme>
+  );
 };
 
 export default App;
