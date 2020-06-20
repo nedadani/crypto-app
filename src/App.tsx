@@ -1,26 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, HTMLAttributes } from "react";
 import Theme from "./Theme";
 
 import Chart from "./components/Chart/Chart.view";
 import { Header } from "./components/Header/Header.view";
+import Switch from "react-input-switch";
 import { Wrapper } from "./App.styles";
 
 const App: React.FC = () => {
   const [theme, setTheme] = useState("dark");
 
   const toggleTheme = () => {
-    if (theme === "light") {
-      setTheme("dark");
-    } else {
-      setTheme("light");
-    }
+    theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
   return (
     <Theme theme={theme}>
       <Wrapper>
         <Header />
-        <button onClick={toggleTheme}>Toggle theme</button>
+        <Switch on="dark" off="light" value={theme} onChange={toggleTheme} />
         <Chart />
       </Wrapper>
     </Theme>
