@@ -17,6 +17,7 @@ const Button = styled.button<ButtonProps>`
     props.selected ? props.theme.primary.background : props.theme.primary.text};
   margin: 0 0.5em 0 0;
   padding: 0.1em 0.5em;
+  cursor: pointer;
 
   @media ${media.md} {
     padding: 0.2em 0.6em;

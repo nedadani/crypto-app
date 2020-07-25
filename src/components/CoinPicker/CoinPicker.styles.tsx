@@ -19,6 +19,7 @@ const Button = styled.button<ButtonProps>`
     props.selected ? props.theme.primary.background : props.theme.primary.text};
   font-size: 0.9em;
   margin: 0 0.5em 1em;
+  cursor: pointer;
 
   @media ${media.md} {
     border-radius: 20px;
