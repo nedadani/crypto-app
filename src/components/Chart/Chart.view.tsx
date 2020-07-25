@@ -16,6 +16,7 @@ import {
 } from "recharts";
 
 import { withTheme } from "styled-components";
+import { media } from "../styles/styles";
 import {
   Wrapper,
   PriceContainer,
