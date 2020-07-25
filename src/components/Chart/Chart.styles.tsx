@@ -1,15 +1,23 @@
 import styled from "styled-components";
 
+import { media } from "../styles/styles";
+
 const Wrapper = styled.main`
   width: 90%;
+  max-width: 1088px;
   display: flex;
   flex-direction: column;
   font-size: 12pt;
   padding-bottom: 5em;
+
+  @media ${media.lg} {
+    padding-bottom: 8em;
+  }
 `;
 
 const PriceContainer = styled.div`
   max-width: 100%;
+  width: 100%;
 `;
 
 const PriceWrapper = styled.div`
@@ -36,6 +44,10 @@ const ChartAreaContainer = styled.div`
 const ChartContainer = styled.div`
   width: 100%;
   height: 300px;
+
+  @media ${media.lg} {
+    height: 400px;
+  }
 `;
 
 const CoinName = styled.div`
@@ -44,6 +56,10 @@ const CoinName = styled.div`
   font-weight: bold;
   color: ${(props) => props.theme.primary.text};
   margin: 1em 0 1.5em;
+
+  @media ${media.md} {
+    font-size: 2em;
+  }
 `;
 
 export {

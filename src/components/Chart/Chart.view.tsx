@@ -16,7 +16,7 @@ import {
 } from "recharts";
 
 import { withTheme } from "styled-components";
-import { media } from "../styles/styles";
+import { breakpoints } from "../styles/styles";
 import {
   Wrapper,
   PriceContainer,
@@ -177,7 +177,9 @@ const Chart: React.FC<ChartProps> = (props) => {
                 domain={["dataMin - 3", "dataMax + 3"]}
                 allowDecimals={false}
                 unit={currency === "USD" ? "$" : "€"}
-                hide={window.innerWidth < media.md}
+                hide={window.innerWidth < breakpoints.md}
+                scale="auto"
+                tick={{ fill: props.theme.primary.text }}
               />
               <Tooltip />
               <Area

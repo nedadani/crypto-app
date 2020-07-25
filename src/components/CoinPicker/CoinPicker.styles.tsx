@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { media } from "../styles/styles";
+
 interface ButtonProps {
   selected: boolean;
 }
@@ -17,6 +19,11 @@ const Button = styled.button<ButtonProps>`
     props.selected ? props.theme.primary.background : props.theme.primary.text};
   font-size: 0.9em;
   margin: 0 0.5em 1em;
+
+  @media ${media.md} {
+    border-radius: 20px;
+    font-size: 1.1em;
+  }
 `;
 
 const Wrapper = styled.div`

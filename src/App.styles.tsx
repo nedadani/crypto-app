@@ -4,6 +4,7 @@ import Switch from "react-input-switch";
 
 const Wrapper = styled.div`
   width: 100%;
+  min-height: 100vh;
   margin: auto;
   display: flex;
   flex-direction: column;
@@ -13,6 +14,7 @@ const Wrapper = styled.div`
 
 const HeaderContainer = styled.header`
   width: 100%;
+  max-width: 1088px;
   height: 60px;
   display: flex;
   flex-direction: row;
