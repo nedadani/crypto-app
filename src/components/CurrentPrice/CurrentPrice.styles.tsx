@@ -1,22 +1,23 @@
 import styled from "styled-components";
 
 const Container = styled.div`
-    width: 6em;
-    border: 1px solid ${(props) => props.theme.primary.text};
-    background-color: ${(props) => props.theme.primary.background};
-    padding: 1em;
-    margin: 0.5em;
+  width: 120px;
+  border: 1px solid ${(props) => props.theme.primary.text};
+  background-color: ${(props) => props.theme.primary.background};
+  padding: 1em;
+  margin: 0.5em;
 `;
 
 const Price = styled.div`
-    color: ${(props) => props.theme.secondary.buttons};
-    font-size: 1.2em;
-    font-weight: bold;
+  color: ${(props) => props.theme.secondary.buttons};
+  font-size: 1.2em;
+  font-weight: bold;
+  width: inherit;
 `;
 
 const Label = styled.div`
-    color: ${(props) => props.theme.primary.text};
-    font-size: 0.8em;
+  color: ${(props) => props.theme.primary.text};
+  font-size: 0.8em;
 `;
 
 export { Container, Price, Label };

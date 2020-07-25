@@ -33,7 +33,7 @@ const App: React.FC = () => {
             />
           </ToggleContainer>
         </HeaderContainer>
-        <Chart />
+        <Chart currentTheme={theme} />
       </Wrapper>
     </Theme>
   );

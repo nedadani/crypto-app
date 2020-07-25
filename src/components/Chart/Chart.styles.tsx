@@ -5,12 +5,18 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   font-size: 12pt;
+  padding-bottom: 5em;
+`;
+
+const PriceContainer = styled.div`
+  max-width: 100%;
 `;
 
 const PriceWrapper = styled.div`
-  width: 100%;
   display: flex;
   flex-direction: row;
+  overflow-x: scroll;
+  padding-bottom: 10px;
 `;
 
 const Container = styled.div`
@@ -19,18 +25,33 @@ const Container = styled.div`
   margin: 0 0 0.5em 0;
 `;
 
-const ChartContainer = styled.div`
+const ChartAreaContainer = styled.div`
   border: 1px solid ${(props) => props.theme.primary.details};
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 100%;
+`;
+
+const ChartContainer = styled.div`
+  width: 100%;
+  height: 300px;
 `;
 
 const CoinName = styled.div`
   text-align: center;
   font-size: 1.5em;
+  font-weight: bold;
   color: ${(props) => props.theme.primary.text};
-  padding: 1em 0;
+  margin: 1em 0 1.5em;
 `;
 
-export { Wrapper, PriceWrapper, Container, ChartContainer, CoinName };
+export {
+  Wrapper,
+  PriceContainer,
+  PriceWrapper,
+  Container,
+  ChartAreaContainer,
+  ChartContainer,
+  CoinName,
+};
