@@ -18,13 +18,16 @@ const App: React.FC = () => {
     theme === "light" ? setTheme("dark") : setTheme("light");
   };
 
+  const toggleText =
+    theme === "dark" ? "Turn on the light" : "Turn off the light";
+
   return (
     <Theme theme={theme}>
       <Wrapper>
         <HeaderContainer>
           <Header />
           <ToggleContainer>
-            <ToggleText>Theme toggle</ToggleText>
+            <ToggleText>{toggleText}</ToggleText>
             <Toggle
               on="dark"
               off="light"
