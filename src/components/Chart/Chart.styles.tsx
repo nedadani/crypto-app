@@ -8,11 +8,6 @@ const Wrapper = styled.main`
   display: flex;
   flex-direction: column;
   font-size: 12pt;
-  padding-bottom: 5em;
-
-  @media ${media.lg} {
-    padding-bottom: 8em;
-  }
 `;
 
 const PriceContainer = styled.div`
@@ -39,15 +34,20 @@ const ChartAreaContainer = styled.div`
   flex-direction: column;
   align-items: center;
   max-width: 100%;
+  margin-bottom: 5em;
+
+  @media ${media.lg} {
+    margin-bottom: 8em;
+  }
 `;
 
 const ChartContainer = styled.div`
   width: 100%;
   height: 300px;
 
-  @media ${media.lg} {
+  /* @media ${media.lg} {
     height: 400px;
-  }
+  } */
 `;
 
 const CoinName = styled.div`
